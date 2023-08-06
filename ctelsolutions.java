@@ -16,15 +16,38 @@ class ctelsolutions{
         BufferedReader valid=new BufferedReader(validation);
         while(true){//while(true) loop is used because this loop iterates for n times. until we break it
             c=starttemplate.read();
-            System.out.println(c);
-            if(c==-1){//after comp
-                System.out.println(c);
+            
+            if(c==-1){//when hole file gets printed on the screen the value which come from the file will -1 as file is empty nothing to print.
                 break;
             }
             System.out.print((char)c);// Converting Variable c from integer to character. 
         }
-    } catch (Exception e) {
+        fileusername=valid.readLine();
+        filepassword=valid.readLine();
+        // System.out.println(fileusername);
+        // System.out.println(filepassword);
+        System.out.println();
+        for(int i=1; i<=3; i++){
+            if(i==2){
+                System.out.println("Its your 2nd attempt");
+            }//if
+            else if(i==3){
+                System.out.println("Its your Last Attempt");
+            }//elseif
+            System.out.println("Please Enter your Credentails....");
+            System.out.println("Enter your Username: ");
+            username=in.next(); 
+            System.out.println("Enter your Password: ");
+            password=in.next();
+            if(username.equals(fileusername) && password.equals(filepassword)){
+                System.out.print("Welcome  "+username);
+                break;
+            }
+        
+        }
+    }//Try
+    catch (IOException e) {
         System.out.print(e);
-    }
-}
-}
+    }//catch
+}//main
+}//Class
