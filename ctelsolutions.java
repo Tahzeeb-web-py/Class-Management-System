@@ -16,7 +16,9 @@ class ctelsolutions{
         BufferedReader valid=new BufferedReader(validation);
         while(true){//while(true) loop is used because this loop iterates for n times. until we break it
             c=starttemplate.read();
-            if(c==-1){
+            System.out.println(c);
+            if(c==-1){//after comp
+                System.out.println(c);
                 break;
             }
             System.out.print((char)c);// Converting Variable c from integer to character. 
