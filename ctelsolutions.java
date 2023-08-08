@@ -78,34 +78,34 @@ void menu(){
         choice=in.nextInt();
         switch(choice){
             case 1:
-                add();
+                add_student();
             break;
             case 2:
-                add();
+                add_faculty();
             break;
             case 3:
-                add();
+                add_student();
             break;
             case 4:
-                add();
+                add_student();
             break;
             case 5:
-                add();
+                add_student();
             break;
             case 6:
-                add();
+                add_student();
             break;
             case 7:
-                add();
+                add_student();
             break;
             case 8:
-                add();
+                add_student();
             break;
             case 9:
-                add();
+                add_student();
             break;
             case 10:
-                add();
+                add_student();
             break;
             default:
             System.out.println(" Invalid choice ");
@@ -117,7 +117,7 @@ void menu(){
         // while loop-------
     }
 }
-void add(){
+void add_student(){
     String name, date, course, fees, feestype, receiptno, mobile, gender, address, data;
     char c;
     try{
@@ -135,7 +135,7 @@ void add(){
             mobile=in.next();
             System.out.print("Enter Gender: ");
             gender=in.next();
-            System.out.print("Enter Address");
+            System.out.print("Enter Address: ");
             address=in.next();
             System.out.print("Enter Course Id: ");
             course=in.next();
@@ -145,6 +145,7 @@ void add(){
             feestype=in.next();
             data=receiptno+"@"+date+"#"+name+"$"+mobile+"%"+gender+"^"+address+"&"+course+"*"+fees+"!"+feestype+"\r\n";
             System.out.println(data);
+            studfile.write(data.getBytes());
             System.out.print("Enter all Details ? y/n");
             c=in.next().charAt(0);
         }while(c=='y');
@@ -153,5 +154,35 @@ void add(){
     catch(IOException e){
         System.out.println(e);
     }//catch
-}//add
+}//add_student
+void add_faculty(){
+    String name, mobile, salary, subject, date,data;
+    char c;
+    try{
+        RandomAccessFile faculty_File=new RandomAccessFile("faculty.txt", "rw");
+        faculty_File.seek(faculty_File.length());
+        do{
+            System.out.println("Enter data to add New Faculty......");
+            System.out.print("Enter Name: ");
+            name=in.next();
+            System.out.print("Enter Mobile No: ");
+            mobile=in.next();
+            System.out.print("Enter Joining Date: ");
+            date=in.next(); 
+            System.out.print("Enter Salary: ");
+            salary=in.next();
+            System.out.print("Enter Subject: ");
+            subject=in.next();
+            data=name+"!"+salary+"@"+date+"#"+mobile+"$"+subject;
+            faculty_File.write(data.getBytes());
+            System.out.print("Do you want to another Faculty? Y/N");
+            c=in.next().charAt(0);
+        }while(c=='y');
+            faculty_File.close();
+        
+    }//try block
+    catch(IOException e){
+        System.out.println(e);
+    }//catch
+}//add_faculty
 }//Class
