@@ -84,7 +84,7 @@ void menu(){
                 add_faculty();
             break;
             case 3:
-                add_student();
+                add_course();
             break;
             case 4:
                 add_student();
@@ -185,4 +185,35 @@ void add_faculty(){
         System.out.println(e);
     }//catch
 }//add_faculty
+void add_course(){
+    String id, name, fees, duration, data;
+    char c;
+    try{
+        RandomAccessFile coursefile=new RandomAccessFile("course.txt", "rw");
+        coursefile.seek(coursefile.length());
+        do{
+        System.out.println("Enter data to add new Course......");
+        System.out.println("Enter Name of Subject: ");
+        name=in.next();
+        System.out.print("Enter New ID: ");
+        id=in.next();
+        System.out.print("Enter Fees: ");
+        fees=in.next();
+        System.out.print("Enter Duration: ");
+        duration=in.next();
+        data=name+"!"+id+"@"+fees+"#"+duration;
+        System.out.print(data);
+        coursefile.write(data.getBytes());
+        System.out.println("Do you want to another Faculty? Y/N");
+        c=in.next().charAt(0);
+
+    }while(c=='y');{
+        coursefile.close();
+    }//do
+
+    }//try
+    catch(IOException e){
+        System.out.println(e);
+    }
+}
 }//Class
