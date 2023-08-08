@@ -63,18 +63,19 @@ void menu(){
     while(true){
         System.out.println("Enter your Choice");
         System.out.println();
-        System.out.println("_____________________________");
-        System.out.println("| 1. |  Add Student         |");
-        System.out.println("| 2. |  Add Facualty        |");
-        System.out.println("| 3. |  Add Course          |");
-        System.out.println("| 4. |  Update Student      |");
-        System.out.println("| 5. |  Update Faculty      |");
-        System.out.println("| 6. |  Update Course       |");
-        System.out.println("| 7. |  Delete Student      |");
-        System.out.println("| 8. |  Delete Falculty     |");
-        System.out.println("| 9. |  Delete Course       |");
-        System.out.println("| 10 |  Report              |");
-        System.out.println("|____|______________________|");
+        System.out.println("_________________________________________________________");
+        System.out.println("||    |                      |    |                     ||");
+        System.out.println("|| 1. |  Add Student         | 11.| View Students       ||");
+        System.out.println("|| 2. |  Add Facualty        | 12.| View Faculties      ||");
+        System.out.println("|| 3. |  Add Course          | 13.| View Courses        ||");
+        System.out.println("|| 4. |  Update Student      | -- |                     ||");
+        System.out.println("|| 5. |  Update Faculty      | -- |                     ||");
+        System.out.println("|| 6. |  Update Course       | -- |                     ||");
+        System.out.println("|| 7. |  Delete Student      | -- |                     ||");
+        System.out.println("|| 8. |  Delete Falculty     | -- |                     ||");
+        System.out.println("|| 9. |  Delete Course       | -- |                     ||");
+        System.out.println("|| 10 |  Report              | -- |                     ||");
+        System.out.println("||____|______________________|____|_____________________||");
         choice=in.nextInt();
         switch(choice){
             case 1:
@@ -113,6 +114,7 @@ void menu(){
     System.out.println("Do you want to Continue ? y-yes n-no");
 		char c1=in.next().charAt(0);
 	if(c1!='y')
+        in.close();
 	    break;
         // while loop-------
     }
