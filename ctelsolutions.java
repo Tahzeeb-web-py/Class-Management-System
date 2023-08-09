@@ -1,4 +1,7 @@
 import java.util.*;
+
+import javax.annotation.processing.FilerException;
+
 import java.io.*;
 class ctelsolutions{
     int x;
@@ -106,7 +109,7 @@ void menu(){
                 add_student();
             break;
              case 11:
-                add_student();
+                view_course();
             break;
             case 12:
                 view_student();
@@ -186,7 +189,7 @@ void add_faculty(){
             salary=in.next();
             System.out.print("Enter Subject: ");
             subject=in.next();
-            data=name+"!"+salary+"@"+date+"#"+mobile+"$"+subject;
+            data=name+"!"+salary+"@"+date+"#"+mobile+"$"+subject+"\r\n";
             faculty_File.write(data.getBytes());
             System.out.print("Do you want to another Faculty? Y/N");
             c=in.next().charAt(0);
@@ -214,7 +217,7 @@ void add_course(){
         fees=in.next();
         System.out.print("Enter Duration: ");
         duration=in.next();
-        data=name+"!"+id+"@"+fees+"#"+duration;
+        data=name+"!"+id+"@"+fees+"#"+duration+"\r\n";
         System.out.print(data);
         coursefile.write(data.getBytes());
         System.out.println("Do you want to another Faculty? Y/N");
@@ -230,8 +233,8 @@ void add_course(){
     }
 }//add course
 void view_student(){
-        String name, date, course, fees, feestype, receiptno, mobile, gender, address, data;
-        int q,w,e,r,t,y,u,i,o;
+        String name, course, fees, feestype, receiptno, mobile, data;
+        int q,w,e,r,y,u,i,t;
         try{
             FileReader rd=new FileReader("student.txt");
             BufferedReader brd=new BufferedReader(rd);
@@ -270,5 +273,38 @@ void view_student(){
         }
 
 
+}//view_student
+void view_course(){
+//id, name, fees, duration, data;
+    String id, name, fees, duration, data;
+    int q,w,r;
+    try {
+        FileReader vc=new FileReader("course.txt");
+        BufferedReader bvc=new BufferedReader(vc);
+        System.out.println("---------------------.C-SOLUTIONS, NGP.-----------------------");
+        System.out.println("...........................Course List........................");
+        System.out.println("|Course ID | Course Name          | Duration(Months)| Fees    |");
+        while(true){
+            data=bvc.readLine();
+            if(data==null){
+                break;
+            }else{
+                q=data.indexOf('!');
+                w=data.indexOf('@');
+                r=data.indexOf('#');
+                //name+"!"+id+"@"+fees+"#"+duration;
+                id=data.substring(q+1,w);
+                name=data.substring(0, q);
+                duration=data.substring(r+1);
+                fees=data.substring(w+1,r);
+                System.out.printf("\n| %-8s | %-20s | %-15s | %-7s |",name, id, duration, fees );
+
+            }
+        }
+
+    } catch (Exception e) {
+        System.out.print(e);
+        // TODO: handle exception
+    }
 }
 }//Class
