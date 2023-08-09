@@ -1,6 +1,2 @@
-359@23-03-2023#Mohd$Tahzeeb%Khan^f&23*345000!Cash
-359@23-03-2023#$7498518671%Male^jafar&nagar*45600!cash
-356@08072002#$7498518671%male^jafarnagar&23*4500!cash
-356@08-07-2002#Mohdtahzeebkha$7498518671%male^jagar&nagar*566!cash
-356@08-07-2002#$7498518671%male^jafar&nagar*45600!cash
-435@3453#$45%345^345&4353*45!345
+123@09-08-2023#Tahzeeb$7498518671%Male^JafarNagar&234*36000!Cash
+234@09-12-2024#Raju$9822130819%Male^Sadar&45*59999!Chaque

@@ -63,19 +63,16 @@ void menu(){
     while(true){
         System.out.println("Enter your Choice");
         System.out.println();
-        System.out.println("_________________________________________________________");
-        System.out.println("||    |                      |    |                     ||");
-        System.out.println("|| 1. |  Add Student         | 11.| View Students       ||");
-        System.out.println("|| 2. |  Add Facualty        | 12.| View Faculties      ||");
-        System.out.println("|| 3. |  Add Course          | 13.| View Courses        ||");
-        System.out.println("|| 4. |  Update Student      | -- |                     ||");
-        System.out.println("|| 5. |  Update Faculty      | -- |                     ||");
-        System.out.println("|| 6. |  Update Course       | -- |                     ||");
-        System.out.println("|| 7. |  Delete Student      | -- |                     ||");
-        System.out.println("|| 8. |  Delete Falculty     | -- |                     ||");
-        System.out.println("|| 9. |  Delete Course       | -- |                     ||");
-        System.out.println("|| 10 |  Report              | -- |                     ||");
-        System.out.println("||____|______________________|____|_____________________||");
+        System.out.println("_____________________________________________________________");
+        System.out.println("||    |                      |     |                       ||");
+        System.out.println("|| 1. |  Add Student         | 8.  |  Delete Falculty      ||");
+        System.out.println("|| 2. |  Add Facualty        | 9.  |  Delete Course        ||");
+        System.out.println("|| 3. |  Add Course          | 10. |  Report               ||");
+        System.out.println("|| 4. |  Update Student      | 11. |  View Courses         ||");
+        System.out.println("|| 5. |  Update Faculty      | 12. |  View Students        ||");
+        System.out.println("|| 6. |  Update Course       | 13. |  View Faculties       ||");
+        System.out.println("|| 7. |  Delete Student      | 14. |  Exit                 ||");
+        System.out.println("||____|______________________|_____|_______________________||");
         choice=in.nextInt();
         switch(choice){
             case 1:
@@ -108,14 +105,28 @@ void menu(){
             case 10:
                 add_student();
             break;
+             case 11:
+                add_student();
+            break;
+            case 12:
+                view_student();
+            break;
+            case 13:
+                add_student();
+            break;
+            case 14:
+            break;
             default:
             System.out.println(" Invalid choice ");
         }
     System.out.println("Do you want to Continue ? y-yes n-no");
 		char c1=in.next().charAt(0);
-	if(c1!='y')
+	if(c1!='y'){
         in.close();
 	    break;
+    }else{
+        continue;
+    }
         // while loop-------
     }
 }
@@ -217,5 +228,47 @@ void add_course(){
     catch(IOException e){
         System.out.println(e);
     }
+}//add course
+void view_student(){
+        String name, date, course, fees, feestype, receiptno, mobile, gender, address, data;
+        int q,w,e,r,t,y,u,i,o;
+        try{
+            FileReader rd=new FileReader("student.txt");
+            BufferedReader brd=new BufferedReader(rd);
+            System.out.println("--------------------------------.C-SOLUTIONS, NGP.-----------------------------------");
+            System.out.println("...................................Student List......................................");
+            System.out.println("_____________________________________________________________________________________");
+            System.out.println("|Receipt No | Name          | Course                | Fees    | Type    | Contact    |");
+            while(true){
+                data=brd.readLine();
+                if(data==null){
+                    break;
+                }//receiptno+"@"+date+"#"+name+"$"+mobile+"%"+gender+"^"+address+"&"+course+"*"+fees+"!"+feestype+
+                else{
+                    q=data.indexOf('@');
+                    w=data.indexOf('#');
+                    e=data.indexOf('$');
+                    r=data.indexOf('%');
+                    t=data.indexOf('^');
+                    y=data.indexOf('&');
+                    u=data.indexOf('*');
+                    i=data.indexOf('!');
+                    receiptno=data.substring(0, q);
+                    name=data.substring(w+1, e);
+                    course=data.substring(y+1,u);
+                    fees=data.substring(u+1,i);
+                    feestype=data.substring(i+1);
+                    mobile=data.substring(e+1,r);
+                    System.out.printf("\n|    %-4s   |%-15s| %-21s |  %-5s  | %-7s | %-10s |", receiptno,name, course, fees, feestype, mobile);
+                }
+            System.out.println("\n|           |               |                       |         |         |            |");
+            }
+                        System.out.println("_____________________________________________________________________________________");
+
+        }catch(IOException ob){
+            System.out.println(ob);
+        }
+
+
 }
 }//Class
