@@ -1,7 +1,4 @@
 import java.util.*;
-
-import javax.annotation.processing.FilerException;
-
 import java.io.*;
 class ctelsolutions{
     int x;
@@ -38,12 +35,12 @@ class ctelsolutions{
                 System.out.println("Its your Last Attempt");
             }//elseif
             System.out.println("Please Enter your Credentails....");
-            System.out.println("Enter your Username: ");
+            System.out.print("Enter your Username: ");
             username=in.next(); 
-            System.out.println("Enter your Password: ");
+            System.out.print("Enter your Password: ");
             password=in.next();
             if(username.equals(fileusername) && password.equals(filepassword)){
-                System.out.println("Welcome  "+username);
+                System.out.println("--------------------  Welcome  "+username+"  --------------------");
                 obj.menu();
                 break;
             }
@@ -64,7 +61,7 @@ void menu(){
     int choice;
     in=new Scanner(System.in);
     while(true){
-        System.out.println("Enter your Choice");
+        System.out.println("\nEnter your Choice");
         System.out.println();
         System.out.println("_____________________________________________________________");
         System.out.println("||    |                      |     |                       ||");
@@ -115,15 +112,16 @@ void menu(){
                 view_student();
             break;
             case 13:
-                add_student();
+                view_faculty();
             break;
             case 14:
             break;
             default:
             System.out.println(" Invalid choice ");
         }
-    System.out.println("Do you want to Continue ? y-yes n-no");
+    System.out.println("\n\nDo you want to Continue ? --> YES or NO");
 		char c1=in.next().charAt(0);
+        System.out.print(c1);
 	if(c1!='y'){
         in.close();
 	    break;
@@ -302,9 +300,47 @@ void view_course(){
             }
         }
 
-    } catch (Exception e) {
+    }//try 
+    catch (Exception e) {
         System.out.print(e);
-        // TODO: handle exception
+    }//catch
+}//View_course
+void view_faculty(){
+    String name, mobile, salary, subject, date,data; 
+    int q,w,r,t;
+    try {
+        FileReader vf = new FileReader("faculty.txt");
+        BufferedReader bvf=new BufferedReader(vf);
+        System.out.println(".................................C-TEL SOLUTIONS, NGP................................");
+        System.out.println("\n                              All Faculties Available                              ");
+        System.out.println(" ");
+        System.out.println("______________________________________________________________________________________");
+        System.out.println("|      Name      |    Contact    |          Subject          | Joining Data | Salary |");
+        System.out.println("|                |               |                           |              |        |");
+        while(true){
+            data=bvf.readLine();
+            if(data==null){
+                break;
+            }else{//name+"!"+salary+"@"+date+"#"+mobile+"$"+subject+
+                q=data.indexOf("!");
+                w=data.indexOf("@");
+                r=data.indexOf("#");
+                t=data.indexOf("$");
+
+                name=data.substring(0, q);
+                salary=data.substring(q+1, w);
+                date=data.substring(w+1, r);
+                mobile=data.substring(r+1, t);
+                subject=data.substring(t+1);
+                System.out.printf("\n|%-16s|%-15s|%-27s|%-14s|%-8s|", name, mobile, subject, date, salary);
+
+            }
+
+        } 
+        System.out.print("\n|________________|_______________|___________________________|______________|________|");
+
+    } catch (Exception e) {
+        System.out.println(e);
     }
 }
 }//Class
