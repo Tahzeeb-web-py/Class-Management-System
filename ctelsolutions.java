@@ -94,7 +94,7 @@ void menu(){
                 add_student();
             break;
             case 7:
-                add_student();
+                delete_student();
             break;
             case 8:
                 add_student();
@@ -121,7 +121,6 @@ void menu(){
         }
     System.out.println("\n\nDo you want to Continue ? --> YES or NO");
 		char c1=in.next().charAt(0);
-        System.out.print(c1);
 	if(c1!='y'){
         in.close();
 	    break;
@@ -342,5 +341,73 @@ void view_faculty(){
     } catch (Exception e) {
         System.out.println(e);
     }
-}
+}//view faculties method
+void delete_student(){
+    String name, date, course, fees, feestype, inputreceiptno,filereceiptno, mobile, gender, address, data, alldata;
+    int q,w,r,t,y,u,i,o, tag=0;
+    System.out.println("\n Enter Receipt Nos: ");
+    inputreceiptno=in.next();
+    try {
+        FileReader rd=new FileReader("student.txt");
+        BufferedReader re=new BufferedReader(rd);
+        FileWriter wr=new FileWriter("temp.txt");
+        BufferedWriter ww=new BufferedWriter(wr);
+        while(true){
+            data=re.readLine();
+            if(data==null)
+                break;
+            else 
+                q=data.indexOf('@'); 
+                w=data.indexOf('#');
+                o=data.indexOf('$');
+                r=data.indexOf('%');
+                t=data.indexOf('^');
+                y=data.indexOf('&');
+                u=data.indexOf('*');
+                i=data.indexOf('!');
+                filereceiptno=data.substring(0, q);
+                name=data.substring(w+1, o);
+                course=data.substring(y+1,u);
+                fees=data.substring(u+1,i);
+                date=data.substring(q+1,w);
+                gender=data.substring(r+1, t);
+                address=data.substring(t+1,y);
+                feestype=data.substring(i+1);
+                mobile=data.substring(o+1,r);
+                alldata=filereceiptno+"@"+date+"#"+name+"$"+mobile+"%"+gender+"^"+address+"&"+course+"*"+fees+"!"+feestype+"\r\n";
+                System.out.print("bahar"+alldata);
+                if(inputreceiptno.equals(filereceiptno)){
+                    tag++;
+                }//if
+                else{
+                    ww.write(alldata);
+                }
+        }//while
+        re.close();
+        ww.close();
+        rd.close();
+        wr.close();
+        if(tag==1){
+            FileReader rd1=new FileReader("temp.txt");
+            BufferedReader re1=new BufferedReader(rd1);
+            FileWriter wr1=new FileWriter("student.txt");
+            BufferedWriter ww1=new BufferedWriter(wr1);
+            while(true){
+                data=re1.readLine();
+                System.out.println(data);
+                    if(data==null)
+                    break;
+                ww1.write(data+"\r\n");
+            }//while
+            re1.close();
+            ww1.close();
+            rd1.close();
+            wr1.close();
+            System.out.println(inputreceiptno+" is Deleted.....");
+        }
+    } catch (Exception e) {
+        System.out.println(e);
+    }
+
+}//Delete_Student 
 }//Class
