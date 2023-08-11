@@ -100,7 +100,7 @@ void menu(){
                 add_student();
             break;
             case 9:
-                add_student();
+                Delete_course();
             break;
             case 10:
                 add_student();
@@ -214,7 +214,7 @@ void add_course(){
         fees=in.next();
         System.out.print("Enter Duration: ");
         duration=in.next();
-        data=name+"!"+id+"@"+fees+"#"+duration+"\r\n";
+        data="\r\n"+name+"!"+id+"@"+fees+"#"+duration;
         System.out.print(data);
         coursefile.write(data.getBytes());
         System.out.println("Do you want to another Faculty? Y/N");
@@ -409,5 +409,66 @@ void delete_student(){
         System.out.println(e);
     }
 
-}//Delete_Student 
+}//Delete_Student
+void Delete_course(){
+    String id, name, fees, duration, data, inputid, alldata;
+    int q,w,r, tag=0;
+    System.out.println("Enter ID of Couse you want to delete: ");
+    inputid=in.next();
+    try {
+        FileReader fc=new FileReader("course.txt");
+        BufferedReader bfc=new BufferedReader(fc);
+        FileWriter ft=new FileWriter("temp.txt");
+        BufferedWriter bft=new BufferedWriter(ft);
+        while(true){
+            data=bfc.readLine();
+            if (data==null) {
+              break;  
+            }//if
+            else 
+                q=data.indexOf('!');
+                w=data.indexOf('@');
+                r=data.indexOf('#');
+                //name+"!"+id+"@"+fees+"#"+duration;
+                id=data.substring(q+1,w);
+                name=data.substring(0, q);
+                duration=data.substring(r+1);
+                fees=data.substring(w+1,r);
+                alldata=name+"!"+id+"@"+fees+"#"+duration+"\r\n";
+                if(inputid.equals(id)){
+                    tag++;
+                }//if
+                else{
+                    bft.write(alldata);
+                }
+        }//while
+        bfc.close();
+        bft.close();
+        fc.close();
+        ft.close();
+        if(tag==1){
+            FileReader fc1=new FileReader("temp.txt");
+            BufferedReader bfc1=new BufferedReader(fc1);
+            FileWriter fw1=new FileWriter("course.txt");
+            BufferedWriter bfw1=new BufferedWriter(fw1);
+            while(true){
+                data=bfc1.readLine();
+                if(data==null){
+                    break;
+                }
+                System.out.println(data);
+                bfw1.write(data+"\r\n");
+
+            }//while
+            bfc1.close();
+            bfw1.close();
+            fc1.close();
+            fw1.close();
+            System.out.println("Course is Deleted.......");
+        }//if
+    }//try
+    catch (Exception e) {
+        System.out.print(e);
+    }//catch
+} //Delete Course
 }//Class
