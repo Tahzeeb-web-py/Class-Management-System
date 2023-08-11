@@ -186,7 +186,7 @@ void add_faculty(){
             salary=in.next();
             System.out.print("Enter Subject: ");
             subject=in.next();
-            data=name+"!"+salary+"@"+date+"#"+mobile+"$"+subject+"\r\n";
+            data="\n"+name+"!"+salary+"@"+date+"#"+mobile+"$"+subject+"\r\n";
             faculty_File.write(data.getBytes());
             System.out.print("Do you want to another Faculty? Y/N");
             c=in.next().charAt(0);
@@ -510,9 +510,28 @@ void Delete_faculty(){
         bfw.close();
         ff.close();
         fw.close();
-        
+        if(tag==1){
+            FileReader fr1=new FileReader("temp.txt");
+            BufferedReader br1=new BufferedReader(fr1);
+            FileWriter fw1=new FileWriter("faculty.txt");
+            BufferedWriter bw1=new BufferedWriter(fw1);
+            while(true){data=br1.readLine();
+            if(data==null){
+                break;
+            }//if
+            else{
+                bw1.write(data+"\n\r");
+            }//else
+        }//while
+        br1.close();
+        bw1.close();
+        fr1.close();
+        fw1.close();
+            
+        }//if
     }//try
     catch (Exception e) {
+        System.out.println(e);
         // TODO: handle exception
     }//catch
 }//Delete Faculty
