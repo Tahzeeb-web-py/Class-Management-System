@@ -97,7 +97,7 @@ void menu(){
                 delete_student();
             break;
             case 8:
-                add_student();
+                Delete_faculty();
             break;
             case 9:
                 Delete_course();
@@ -471,4 +471,49 @@ void Delete_course(){
         System.out.print(e);
     }//catch
 } //Delete Course
+void Delete_faculty(){
+    String name, mobile, salary, subject, date,data, inputname,alldata; 
+    int q,w,r,t, tag=0;
+    try {
+        FileReader ff=new FileReader("faculty.txt");
+        BufferedReader bff=new BufferedReader(ff);
+        FileWriter fw=new FileWriter("temp.txt");
+        BufferedWriter bfw=new BufferedWriter(fw);
+        System.out.println("Enter Name of Faculty you want to Delete: ");
+        inputname=in.next();
+        while(true){
+            data=bff.readLine();
+            if(data==null){
+                break;
+            }
+            else{
+                q=data.indexOf("!");
+                w=data.indexOf("@");
+                r=data.indexOf("#");
+                t=data.indexOf("$");
+
+                name=data.substring(0, q);
+                salary=data.substring(q+1, w);
+                date=data.substring(w+1, r);
+                mobile=data.substring(r+1, t);
+                subject=data.substring(t+1);
+                alldata=name+"!"+salary+"@"+date+"#"+mobile+"$"+subject+"\r\n";
+                if(inputname.equals(name)){
+                    tag++;
+                }
+                else{
+                    bfw.write(alldata);
+                }
+            }
+        }//while
+        bff.close();
+        bfw.close();
+        ff.close();
+        fw.close();
+        
+    }//try
+    catch (Exception e) {
+        // TODO: handle exception
+    }//catch
+}//Delete Faculty
 }//Class
