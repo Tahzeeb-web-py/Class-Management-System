@@ -1,8 +1,11 @@
 import java.util.*;
 import java.io.*;
+import java.io.File;
 class ctelsolutions{
     int x;
-    Scanner in=new Scanner(System.in); // Scanner class object is Created. 
+    Scanner in=new Scanner(System.in); // Scanner class object is Created.
+    
+    
     public static void main(String args[]){
         int c; //Variable for storing the data or lines fetch from the file is declared.Note this variable is declared int type because the data stored in the start.txt is symbol and that symbols are stored using number. 
         String username, password; //Two variable with String datatype is declared to get the input from user.
@@ -403,6 +406,9 @@ void delete_student(){
             rd1.close();
             wr1.close();
             System.out.println(inputreceiptno+" is Deleted.....");
+        }//if
+        else{
+            System.out.println("No Recipt no. found.....Please check again.");
         }
     } catch (Exception e) {
         System.out.println(e);
@@ -465,6 +471,9 @@ void Delete_course(){
             fw1.close();
             System.out.println("Course is Deleted.......");
         }//if
+        else{
+            System.out.print("No Course with id "+inputid+" found.....Please Check the ID again");
+        }
     }//try
     catch (Exception e) {
         System.out.print(e);
@@ -526,8 +535,11 @@ void Delete_faculty(){
         bw1.close();
         fr1.close();
         fw1.close();
-            
+        System.out.print("Faculty Deleted.");
         }//if
+        else{
+            System.out.println("No Data Found, Please Check the Name...");
+        }
     }//try
     catch (Exception e) {
         System.out.println(e);
