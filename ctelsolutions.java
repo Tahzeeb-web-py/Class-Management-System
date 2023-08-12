@@ -186,7 +186,7 @@ void add_faculty(){
             salary=in.next();
             System.out.print("Enter Subject: ");
             subject=in.next();
-            data="\n"+name+"!"+salary+"@"+date+"#"+mobile+"$"+subject+"\r\n";
+            data=name+"!"+salary+"@"+date+"#"+mobile+"$"+subject+"\r\n";
             faculty_File.write(data.getBytes());
             System.out.print("Do you want to another Faculty? Y/N");
             c=in.next().charAt(0);
@@ -214,7 +214,7 @@ void add_course(){
         fees=in.next();
         System.out.print("Enter Duration: ");
         duration=in.next();
-        data="\r\n"+name+"!"+id+"@"+fees+"#"+duration;
+        data=name+"!"+id+"@"+fees+"#"+duration+"\r\n";
         System.out.print(data);
         coursefile.write(data.getBytes());
         System.out.println("Do you want to another Faculty? Y/N");
@@ -294,7 +294,7 @@ void view_course(){
                 name=data.substring(0, q);
                 duration=data.substring(r+1);
                 fees=data.substring(w+1,r);
-                System.out.printf("\n| %-8s | %-20s | %-15s | %-7s |",name, id, duration, fees );
+                System.out.printf("\n| %-8s | %-20s | %-15s | %-7s |",id, name, duration, fees );
 
             }
         }
@@ -374,13 +374,12 @@ void delete_student(){
                 address=data.substring(t+1,y);
                 feestype=data.substring(i+1);
                 mobile=data.substring(o+1,r);
-                alldata=filereceiptno+"@"+date+"#"+name+"$"+mobile+"%"+gender+"^"+address+"&"+course+"*"+fees+"!"+feestype+"\r\n";
-                System.out.print("bahar"+alldata);
+                alldata=filereceiptno+"@"+date+"#"+name+"$"+mobile+"%"+gender+"^"+address+"&"+course+"*"+fees+"!"+feestype;
                 if(inputreceiptno.equals(filereceiptno)){
                     tag++;
                 }//if
                 else{
-                    ww.write(alldata);
+                    ww.write(alldata+"\r\n");
                 }
         }//while
         re.close();
@@ -397,7 +396,7 @@ void delete_student(){
                 System.out.println(data);
                     if(data==null)
                     break;
-                ww1.write(data+"\r\n");
+                ww1.write(data+"\n");
             }//while
             re1.close();
             ww1.close();
@@ -434,12 +433,12 @@ void Delete_course(){
                 name=data.substring(0, q);
                 duration=data.substring(r+1);
                 fees=data.substring(w+1,r);
-                alldata=name+"!"+id+"@"+fees+"#"+duration+"\r\n";
+                alldata=name+"!"+id+"@"+fees+"#"+duration;
                 if(inputid.equals(id)){
                     tag++;
                 }//if
                 else{
-                    bft.write(alldata);
+                    bft.write(alldata+"\r\n");
                 }
         }//while
         bfc.close();
@@ -457,7 +456,7 @@ void Delete_course(){
                     break;
                 }
                 System.out.println(data);
-                bfw1.write(data+"\r\n");
+                bfw1.write(data+"\n");
 
             }//while
             bfc1.close();
@@ -497,12 +496,12 @@ void Delete_faculty(){
                 date=data.substring(w+1, r);
                 mobile=data.substring(r+1, t);
                 subject=data.substring(t+1);
-                alldata=name+"!"+salary+"@"+date+"#"+mobile+"$"+subject+"\r\n";
+                alldata=name+"!"+salary+"@"+date+"#"+mobile+"$"+subject;
                 if(inputname.equals(name)){
                     tag++;
                 }
                 else{
-                    bfw.write(alldata);
+                    bfw.write(alldata+"\r\n");
                 }
             }
         }//while
@@ -520,7 +519,7 @@ void Delete_faculty(){
                 break;
             }//if
             else{
-                bw1.write(data+"\n\r");
+                bw1.write(data+"\n");
             }//else
         }//while
         br1.close();
