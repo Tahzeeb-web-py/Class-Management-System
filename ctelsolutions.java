@@ -1,6 +1,5 @@
 import java.util.*;
 import java.io.*;
-import java.io.File;
 class ctelsolutions{
     int x;
     Scanner in=new Scanner(System.in); // Scanner class object is Created.
@@ -543,7 +542,6 @@ void Delete_faculty(){
     }//try
     catch (Exception e) {
         System.out.println(e);
-        // TODO: handle exception
     }//catch
 }//Delete Faculty
 }//Class
