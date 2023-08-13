@@ -87,7 +87,7 @@ void menu(){
                 add_course();
             break;
             case 4:
-                add_student();
+                update_student();
             break;
             case 5:
                 add_student();
@@ -544,4 +544,170 @@ void Delete_faculty(){
         System.out.println(e);
     }//catch
 }//Delete Faculty
+void update_student(){
+    String name, date, course, fees, feestype, receiptno, mobile, gender, address, data, alldata,filereceiptno,inputreceiptno;
+    int q,w,r,t,y,u,i,o, tag=0;
+    System.out.println("Enter Recipt no: ");
+    inputreceiptno=in.next();
+    try{
+    FileReader studfile=new FileReader("student.txt");
+    FileWriter temp=new FileWriter("temp.txt");
+    RandomAccessFile update=new RandomAccessFile("update.txt", "rw");
+    BufferedReader bufferstudfile=new BufferedReader(studfile);
+    BufferedWriter buffertemp=new BufferedWriter(temp);    
+        while(true){
+            data=bufferstudfile.readLine();
+            if(data==null){
+                break;
+            }//if
+            else{
+                q=data.indexOf('@'); 
+                w=data.indexOf('#');
+                o=data.indexOf('$');
+                r=data.indexOf('%');
+                t=data.indexOf('^');
+                y=data.indexOf('&');
+                u=data.indexOf('*');
+                i=data.indexOf('!');
+                filereceiptno=data.substring(0, q);
+                name=data.substring(w+1, o);
+                course=data.substring(y+1,u);
+                fees=data.substring(u+1,i);
+                date=data.substring(q+1,w);
+                gender=data.substring(r+1, t);
+                address=data.substring(t+1,y);
+                feestype=data.substring(i+1);
+                mobile=data.substring(o+1,r);
+                alldata=filereceiptno+"@"+date+"#"+name+"$"+mobile+"%"+gender+"^"+address+"&"+course+"*"+fees+"!"+feestype+"\r\n";
+                if(inputreceiptno.equals(filereceiptno)){
+                    update.write(alldata.getBytes());
+                    tag++;
+                }//if
+                else{
+                    buffertemp.write(alldata);
+                }//else
+            }//else
+        }//while
+        bufferstudfile.close();
+        buffertemp.close();
+        temp.close();
+        update.close();
+        studfile.close();
+        if(tag>=1){
+            String olddata,data1, variable_name_alter, variable_course_alter, variable_fees_alter, variable_feestype_alter, variable_receiptno_alter, variable_mobile_alter,variable_address_alter, variable_gender_alter, variable_date_alter;
+            String name_alter, course_alter, fees_alter, feestype_alter, mobile_alter, date_alter, address_alter, gender_alter;
+            int q_alter,w_alter,e_alter,r_alter,y_alter,u_alter,i_alter,t_alter;
+            try {
+                RandomAccessFile update_alter=new RandomAccessFile("update.txt", "rw");
+                RandomAccessFile temp_alter=new RandomAccessFile("temp.txt","rw");
+                temp_alter.seek(temp_alter.length());
+                olddata=update_alter.readLine();
+                q_alter=olddata.indexOf('@');
+                w_alter=olddata.indexOf('#');
+                e_alter=olddata.indexOf('$');
+                r_alter=olddata.indexOf('%');
+                t_alter=olddata.indexOf('^');
+                y_alter=olddata.indexOf('&');
+                u_alter=olddata.indexOf('*');
+                i_alter=olddata.indexOf('!');
+                variable_receiptno_alter=olddata.substring(0, q_alter);
+                variable_date_alter=olddata.substring(q_alter+1, w_alter);
+                variable_name_alter=olddata.substring(w_alter+1,e_alter);
+                variable_mobile_alter=olddata.substring(e_alter+1,r_alter);
+                variable_gender_alter=olddata.substring(r_alter+1, t_alter);
+                variable_address_alter=olddata.substring(t_alter+1,y_alter);
+                variable_course_alter=olddata.substring(y_alter+1, u_alter);
+                variable_fees_alter=olddata.substring(u_alter+1, i_alter);
+                variable_feestype_alter=olddata.substring(i_alter+1);
+                data1=variable_receiptno_alter+variable_date_alter+variable_name_alter+variable_fees_alter+variable_course_alter+variable_feestype_alter+variable_gender_alter+variable_address_alter+variable_mobile_alter;
+                System.out.println("-----------------------------------------------------.C-SOLUTIONS, NGP.------------------------------------------------------");
+                System.out.println("........................................................Student List.........................................................");
+                System.out.println("_____________________________________________________________________________________________________________________________");
+                System.out.println("|Receipt No|    Date    | Name          | Gender | Course                | Fees    | Type    | Contact    |     Address     |");
+                System.out.println("|----------|------------|---------------|--------|-----------------------|---------|---------|------------|-----------------|");
+                System.out.printf("|   %-4s   |%-12s|%-15s| %-6s | %-21s |  %-5s  | %-7s | %-10s |%-17s| \n", variable_receiptno_alter,variable_date_alter,variable_name_alter, variable_gender_alter,variable_course_alter, variable_fees_alter, variable_feestype_alter, variable_mobile_alter, variable_address_alter);
+                System.out.println("|__________|____________|_______________|________|_______________________|_________|_________|____________|_________________|");
+                System.out.println("\n\n");
+                System.out.println("Changing data for Student ID: "+variable_receiptno_alter);
+                System.out.println("Enter Name: ");
+                name_alter=in.next();
+                if(name_alter.equals(".") || name_alter.equals("/")){
+                    name_alter=variable_name_alter;
+                }
+                System.out.println("Enter Admission Date: ");
+                date_alter=in.next();
+                if(date_alter.equals(".") || date_alter.equals("/")){
+                    date_alter=variable_date_alter;
+                }
+                System.out.println("Enter Gender: ");
+                gender_alter=in.next();
+                if(gender_alter.equals(".") || gender_alter.equals("/")){
+                    gender_alter=variable_gender_alter;
+                }
+                System.out.println("Enter Course: ");
+                course_alter=in.next();
+                if(course_alter.equals(".") || course_alter.equals("/")){
+                    course_alter=variable_course_alter;
+                }
+                System.out.println("Enter Fees: ");
+                fees_alter=in.next();
+                if(fees_alter.equals(".") || fees_alter.equals("/")){
+                    fees_alter=variable_fees_alter;
+                }
+                System.out.println("Enter FeesType: ");
+                feestype_alter=in.next();
+                if(feestype_alter.equals(".") || fees_alter.equals("/")){
+                    feestype_alter=variable_feestype_alter;
+                }
+                System.out.println("Enter Contact: ");
+                mobile_alter=in.next();
+                if(mobile_alter.equals(".") || mobile_alter.equals("/")){
+                    mobile_alter=variable_mobile_alter;
+                }
+                System.out.println("Enter Address: ");
+                address_alter=in.next();
+                if(address_alter.equals(".") || address_alter.equals("/")){
+                    address_alter=variable_address_alter;
+                }
+                System.out.println("\n\nUpdated Details"); 
+                System.out.println("_____________________________________________________________________________________________________________________________");
+                System.out.println("|Receipt No|    Date    | Name          | Gender | Course                | Fees    | Type    | Contact    |     Address     |");
+                System.out.println("|----------|------------|---------------|--------|-----------------------|---------|---------|------------|-----------------|");
+                System.out.printf("|   %-4s   |%-12s|%-15s| %-6s | %-21s |  %-5s  | %-7s | %-10s |%-17s| \n", variable_receiptno_alter,date_alter,name_alter, gender_alter,course_alter, fees_alter, feestype_alter, mobile_alter, address_alter);
+                System.out.println("|__________|____________|_______________|________|_______________________|_________|_________|____________|_________________|");
+                data1=variable_receiptno_alter+"@"+date_alter+"#"+name_alter+"$"+mobile_alter+"%"+gender_alter+"^"+address_alter+"&"+course_alter+"*"+fees_alter+"!"+feestype_alter+"\r\n";
+                temp_alter.write(data1.getBytes());
+                temp_alter.close();
+                update_alter.close();
+            }//try
+            catch (Exception e) {
+                System.out.println(e);
+            }//catch
+        }//if
+        try{
+            FileReader fr1=new FileReader("temp.txt");
+            BufferedReader br1=new BufferedReader(fr1);
+            FileWriter fw1=new FileWriter("student.txt");
+            BufferedWriter bw1=new BufferedWriter(fw1);
+            while(true){data=br1.readLine();
+            if(data==null){
+                break;
+            }//if
+            else{
+                bw1.write(data+"\n");
+            }//else
+        }//while
+        br1.close();
+        bw1.close();
+        fr1.close();
+        fw1.close();
+        }catch(IOException e){
+            System.out.println(e);
+        }
+    }//Try
+    catch(IOException e){
+        System.out.println("Please Check, Some Error Occured Due to Files. Please Contact the Develops teams.");
+        System.out.println(e);
+    }//catch
+}//update_student
 }//Class
