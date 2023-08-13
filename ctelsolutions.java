@@ -1,4 +1,7 @@
 import java.util.*;
+
+import javax.annotation.processing.Filer;
+
 import java.io.*;
 class ctelsolutions{
     int x;
@@ -93,7 +96,7 @@ void menu(){
                 add_student();
             break;
             case 6:
-                add_student();
+                update_faculty();
             break;
             case 7:
                 delete_student();
@@ -710,4 +713,94 @@ void update_student(){
         System.out.println(e);
     }//catch
 }//update_student
+void update_faculty(){
+    String id, name, fees, duration, data, inputid, alldata;
+    int q,w,r, tag=0;
+    System.out.println("Enter the id of Course: ");
+    inputid=in.next(); 
+    try {
+        RandomAccessFile course_access=new RandomAccessFile("course.txt", "rw");
+        FileWriter temp=new FileWriter("temp.txt");
+        FileWriter update=new FileWriter("update.txt");
+        BufferedWriter buff_temp=new BufferedWriter(temp);
+        BufferedWriter buff_update=new BufferedWriter(update);
+        while(true){ 
+            data=course_access.readLine();
+            if(data==null){
+                break;
+            }//if
+            else{
+                q=data.indexOf('!');
+                w=data.indexOf('@');
+                r=data.indexOf('#');
+                name=data.substring(0, q);
+                id=data.substring(q+1, w);
+                //DBMS!03@4300##4
+                fees=data.substring(w+1,r); 
+                duration=data.substring(r);
+                alldata=id+"!"+name+"@"+fees+"#"+duration+"\r\n";
+                System.out.println(id );
+                if(id.equals(inputid)){
+                    tag++;
+                    buff_update.write(alldata);
+                }//ifv 
+                else{
+                    buff_temp.write(alldata);
+                }//else 
+            }//else
+            
+        }//while
+        buff_temp.close();
+        buff_update.close();
+        temp.close();
+        update.close();
+        course_access.close();
+        if(tag>=1){
+            String id1, name1, duration1, fees1, alldata1;
+            FileWriter temp1=new FileWriter("temp.txt");
+            BufferedWriter buff_temp1=new BufferedWriter(temp1);
+            FileReader update1=new FileReader("update.txt");
+            BufferedReader buff_update1=new BufferedReader(update1);
+            data=buff_update1.readLine();
+            q=data.indexOf('!');
+            w=data.indexOf('@');
+            r=data.indexOf('#');
+            name=data.substring(0, q);
+            id=data.substring(q+1, w);
+            //DBMS!03@4300##4
+            fees=data.substring(w+1,r); 
+            duration=data.substring(r);
+            alldata=id+"!"+name+"@"+fees+"#"+duration+"\r\n";
+            System.out.println("---------------------.C-SOLUTIONS, NGP.-----------------------");
+            System.out.println("...........................Course List........................");
+            System.out.println("|Course ID | Course Name          | Duration(Months)| Fees    |");
+            System.out.printf("\n| %-8s | %-20s | %-15s | %-7s |",id, name, duration, fees );
+            System.out.println();
+            System.out.println("Change data for Course ID: "+id);
+            System.out.println();
+            System.out.print("Enter Name: ");
+            name1=in.next();
+            if(name1.equals(".")){
+                name1=name;
+            }
+            System.out.print("Enter Duration of Course: ");
+            duration1=in.next();
+            if(duration1.equals(".")){
+                duration1=duration;
+            }
+            System.out.print("Enter Fees of the Course: ");
+            fees1=in.next();
+            if(fees1.equals(".")){
+                fees1=fees;
+            }
+            alldata1=name1+"!"+id+"@"+fees1+"#"+duration1+"\r\n";
+            System.out.println(alldata1);
+            buff_temp1.write(alldata1);
+
+        }
+    } catch (Exception e) {
+        System.out.println(e);
+        // TODO: handle exception
+    }
+}
 }//Class
