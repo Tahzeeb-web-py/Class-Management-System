@@ -798,6 +798,8 @@ void update_faculty(){
             buff_temp1.write(alldata1);
 
         }
+        buff_temp.close();
+        temp.close();
     } catch (Exception e) {
         System.out.println(e);
         // TODO: handle exception
