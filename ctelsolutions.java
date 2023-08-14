@@ -738,17 +738,15 @@ void update_faculty(){
                 //DBMS!03@4300##4
                 fees=data.substring(w+1,r); 
                 duration=data.substring(r);
-                alldata=id+"!"+name+"@"+fees+"#"+duration+"\r\n";
-                System.out.println(id );
+                alldata=name+"!"+id+"@"+fees+"#"+duration+"\r\n";
                 if(id.equals(inputid)){
                     tag++;
                     buff_update.write(alldata);
-                }//ifv 
+                }//if
                 else{
                     buff_temp.write(alldata);
                 }//else 
             }//else
-            
         }//while
         buff_temp.close();
         buff_update.close();
@@ -793,6 +791,11 @@ void update_faculty(){
             if(fees1.equals(".")){
                 fees1=fees;
             }
+            System.out.println("...........................Course List.........................");
+            System.out.println("|Course ID | Course Name          | Duration(Months)| Fees    |");
+            System.out.printf("\n| %-8s | %-20s | %-15s | %-7s |",id, name1, duration1, fees1 );
+            System.out.println("\n|__________|______________________|_______________|___________|");
+            System.out.println();
             alldata1=name1+"!"+id+"@"+fees1+"#"+duration1+"\r\n";
             System.out.println(alldata1);
             buff_temp1.write(alldata1);
