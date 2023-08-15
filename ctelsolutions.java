@@ -1,7 +1,4 @@
 import java.util.*;
-
-import javax.annotation.processing.Filer;
-
 import java.io.*;
 class ctelsolutions{
     int x;
@@ -93,10 +90,10 @@ void menu(){
                 update_student();
             break;
             case 5:
-                add_student();
+                update_faculty();
             break;
             case 6:
-                update_faculty();
+                update_course();
             break;
             case 7:
                 delete_student();
@@ -548,7 +545,7 @@ void Delete_faculty(){
     }//catch
 }//Delete Faculty
 void update_student(){
-    String name, date, course, fees, feestype, receiptno, mobile, gender, address, data, alldata,filereceiptno,inputreceiptno;
+    String name, date, course, fees, feestype, mobile, gender, address, data, alldata,filereceiptno,inputreceiptno;
     int q,w,r,t,y,u,i,o, tag=0;
     System.out.println("Enter Recipt no: ");
     inputreceiptno=in.next();
@@ -713,16 +710,16 @@ void update_student(){
         System.out.println(e);
     }//catch
 }//update_student
-void update_faculty(){
+void update_course(){
     String id, name, fees, duration, data, inputid, alldata;
     int q,w,r, tag=0;
     System.out.println("Enter the id of Course: ");
     inputid=in.next(); 
     try {
         RandomAccessFile course_access=new RandomAccessFile("course.txt", "rw");
-        FileWriter temp=new FileWriter("temp.txt");
+        FileWriter temp1=new FileWriter("temp.txt");
         FileWriter update=new FileWriter("update.txt");
-        BufferedWriter buff_temp=new BufferedWriter(temp);
+        BufferedWriter buff_temp=new BufferedWriter(temp1);
         BufferedWriter buff_update=new BufferedWriter(update);
         while(true){ 
             data=course_access.readLine();
@@ -740,23 +737,27 @@ void update_faculty(){
                 duration=data.substring(r);
                 alldata=name+"!"+id+"@"+fees+"#"+duration+"\r\n";
                 if(id.equals(inputid)){
-                    tag++;
+                
                     buff_update.write(alldata);
+                    tag++;
                 }//if
                 else{
+                    System.out.println(alldata);
                     buff_temp.write(alldata);
+                    System.out.println("done");
                 }//else 
             }//else
         }//while
         buff_temp.close();
         buff_update.close();
-        temp.close();
+        temp1.close();
         update.close();
         course_access.close();
         if(tag>=1){
-            String id1, name1, duration1, fees1, alldata1;
-            FileWriter temp1=new FileWriter("temp.txt");
-            BufferedWriter buff_temp1=new BufferedWriter(temp1);
+            String name1, duration1, fees1, alldata1;
+            try{
+            FileWriter temp2=new FileWriter("temp.txt");
+            BufferedWriter buff_temp1=new BufferedWriter(temp2);
             FileReader update1=new FileReader("update.txt");
             BufferedReader buff_update1=new BufferedReader(update1);
             data=buff_update1.readLine();
@@ -765,7 +766,6 @@ void update_faculty(){
             r=data.indexOf('#');
             name=data.substring(0, q);
             id=data.substring(q+1, w);
-            //DBMS!03@4300##4
             fees=data.substring(w+1,r); 
             duration=data.substring(r);
             alldata=id+"!"+name+"@"+fees+"#"+duration+"\r\n";
@@ -794,18 +794,66 @@ void update_faculty(){
             System.out.println("...........................Course List.........................");
             System.out.println("|Course ID | Course Name          | Duration(Months)| Fees    |");
             System.out.printf("\n| %-8s | %-20s | %-15s | %-7s |",id, name1, duration1, fees1 );
-            System.out.println("\n|__________|______________________|_______________|___________|");
+            System.out.println("\n|__________|______________________|_________________|_________|");
             System.out.println();
             alldata1=name1+"!"+id+"@"+fees1+"#"+duration1+"\r\n";
             System.out.println(alldata1);
             buff_temp1.write(alldata1);
-
-        }
+        
         buff_temp.close();
-        temp.close();
+        buff_update1.close();
+        temp2.close();
+    }
+    catch(Exception b){
+        System.out.println(b);
+    }
+}
     } catch (Exception e) {
         System.out.println(e);
-        // TODO: handle exception
+    }//catch
+}//update_faculty
+void update_faculty(){
+    String name, contact, salary, date, subject, data, inputname, alldata;
+    int q,w,t ,r, tag=0;
+    System.out.println("Enter Faculty Name: ");
+    inputname=in.next();
+    try(
+        RandomAccessFile faculty= new RandomAccessFile("faculty.txt", "rw");
+        FileWriter temp=new FileWriter("temp.txt");
+        FileWriter update=new FileWriter("update.txt");
+        BufferedWriter buff_temp=new BufferedWriter(temp);
+        BufferedWriter buff_update=new BufferedWriter(update);
+    ) {
+        while(true){
+            data=faculty.readLine();
+            if(data==null){
+                break;
+            }//if
+            else{
+                q=data.indexOf('!');
+                w=data.indexOf('@');
+                t=data.indexOf('#');
+                r=data.indexOf('$');
+                name=data.substring(0, q);
+                salary=data.substring(q+1, w);
+                date=data.substring(w+1,t);
+                contact=data.substring(t+1, r);
+                subject=data.substring(r+1);
+                alldata=name+"!"+salary+"@"+date+"#"+contact+"$"+subject+"\r\n";
+                if(name.equals(inputname)){
+                    buff_update.write(alldata);
+                    tag++;
+                }//if
+                else{
+                    buff_temp.write(alldata);
+                }//else
+                
+            }//else
+        }//while
+        
+    }// try
+    catch (Exception e) {
+        System.out.println(e);
     }
 }
 }//Class
