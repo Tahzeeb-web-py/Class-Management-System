@@ -850,10 +850,50 @@ void update_faculty(){
                 
             }//else
         }//while
+        faculty.close();
+        buff_temp.close();
+        buff_update.close();
+        update.close();
+        temp.close();
+        System.out.println("close ho gayi 1 part ki files");
+        if(tag>=1){
+            String nameold, contactold, salaryold, dateold, subjectold, dataold;
+            String nameget,contactget, salaryget, dateget,subjectget;
+            int a,b,c,d;
+            try(
+                RandomAccessFile temprary=new RandomAccessFile("temp.txt", "rw");
+                FileReader updatereader=new FileReader("update.txt");
+                BufferedReader buff_updatereader=new BufferedReader(updatereader);
+                ) {
+                    dataold=buff_updatereader.readLine();
+                
+                a=dataold.indexOf('!');
+                b=dataold.indexOf('@');
+                c=dataold.indexOf('#');
+                d=dataold.indexOf('$');
+                nameold=dataold.substring(0, a);  
+                salaryold=dataold.substring(a+1, b);
+                dateold=dataold.substring(b+1,c);
+                contactold=dataold.substring(c+1, d);  
+                subjectold=dataold.substring(d+1);   
+                System.out.println("\n                                 Faculty Available                                 ");
+                System.out.println("____________________ __________________________________________________________________");
+                System.out.println("|      Name      |    Contact    |          Subject          | Joining Data | Salary |");
+                System.out.println("|                |               |                           |              |        |");
+                System.out.printf("\n|%-16s|%-15s|%-27s|%-14s|%-8s|", nameold, contactold, subjectold, dateold, salaryold);
+                System.out.print("\n|________________|_______________|___________________________|______________|________|");
+
+                
+            }//try
+             catch (Exception e) {
+                System.out.println("error:" +e);
+            }//catch
+
+        }//if
         
     }// try
     catch (Exception e) {
-        System.out.println(e);
+        System.out.println("dfgd: "+e);
     }
 }
 }//Class
