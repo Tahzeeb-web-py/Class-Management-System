@@ -865,6 +865,7 @@ void update_faculty(){
                 FileReader updatereader=new FileReader("update.txt");
                 BufferedReader buff_updatereader=new BufferedReader(updatereader);
                 ) {
+                    temprary.seek(temprary.length());
                     dataold=buff_updatereader.readLine();
                 
                 a=dataold.indexOf('!');
@@ -877,22 +878,79 @@ void update_faculty(){
                 contactold=dataold.substring(c+1, d);  
                 subjectold=dataold.substring(d+1);   
                 System.out.println("\n                                 Faculty Available                                 ");
-                System.out.println("____________________ __________________________________________________________________");
+                System.out.println("______________________________________________________________________________________");
                 System.out.println("|      Name      |    Contact    |          Subject          | Joining Data | Salary |");
                 System.out.println("|                |               |                           |              |        |");
                 System.out.printf("\n|%-16s|%-15s|%-27s|%-14s|%-8s|", nameold, contactold, subjectold, dateold, salaryold);
                 System.out.print("\n|________________|_______________|___________________________|______________|________|");
-
-                
+                System.out.println("\n \n Enter Name: ");
+                nameget=in.next();
+                if(nameget=="." || nameget== "/"){
+                    nameget=nameold;
+                }
+                System.out.println("Enter Contact:");
+                contactget=in.next();
+                if(contactget=="." || contactget== "/"){
+                    contactget=contactold;
+                }
+                System.out.println("Enter Subject: ");
+                subjectget=in.next();
+                if(subjectget=="." || subjectget== "/"){
+                    subjectget=subjectold;
+                }
+                System.out.println("Enter Joining date: ");
+                dateget=in.next();
+                if(dateget=="." || dateget== "/"){
+                    dateget=dataold;
+                }
+                System.out.println("Enter Salary: ");
+                salaryget=in.next();
+                if(salaryget=="." || salaryget== "/"){
+                    salaryget=salaryold;
+                }
+                dataold=nameget+"!"+salaryget+"@"+dateget+"#"+contactget+"$"+subjectget+"\r\n";
+                temprary.write(dataold.getBytes());
+                System.out.println("\n Updated Date..");
+                System.out.println("______________________________________________________________________________________");
+                System.out.println("|      Name      |    Contact    |          Subject          | Joining Data | Salary |");
+                System.out.println("|                |               |                           |              |        |");
+                System.out.printf("\n|%-16s|%-15s|%-27s|%-14s|%-8s|", nameget, contactget, subjectget, dateget, salaryget);
+                System.out.print("\n|________________|_______________|___________________________|______________|________|");
+                temprary.close();
+                buff_updatereader.close();
+                updatereader.close();
             }//try
              catch (Exception e) {
                 System.out.println("error:" +e);
             }//catch
 
         }//if
+        else{
+            System.out.println("Invalid Name......");
+            
+        }
+    try(
+        RandomAccessFile faculty_get=new RandomAccessFile("faculty.txt", "rw");
+        RandomAccessFile temprary=new RandomAccessFile("temp.txt", "rw");
+    ) {
+        while(true){
+            String datacome;
+            datacome=temprary.readLine();
+            if(datacome==null){
+                break;
+            }
+            else{
+                datacome=datacome+"\r\n";
+                faculty_get.write(datacome.getBytes());
+            }
+        }
         
+    }     
     }// try
     catch (Exception e) {
+        // TODO: handle exception
+    }
+    catch (IOError e) {
         System.out.println("dfgd: "+e);
     }
 }
