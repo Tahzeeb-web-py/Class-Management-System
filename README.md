@@ -53,6 +53,15 @@ if above command fire any Error then use this command.
     username: admin
     password: pass@123
 ```
+## What Files Content?
+
+1. login.txt -> Login details(Line no 1 contents Username, Line no 2 contents Password)
+2. start.txt -> This file contents design
+3. student.txt ->  This file contents all student details
+4. Faculty.txt -> This file contents all the Faculty details
+5. course.txt -> This file contents all the Course details
+6. update.txt -> This file will content details of which data is to be update.
+7. temp.txt -> This file will content the temprary data which is used for deleting or updating the existing data.
     
 ## Author
 
