@@ -20,4 +20,4 @@ This Project is totally based on Core Java programming. This is a Terimal(doss)b
 4. Error Handling
 5. Classes and Object
 6. Constructor
-7. Methods(Functins)
+7. Methods(Functions)
