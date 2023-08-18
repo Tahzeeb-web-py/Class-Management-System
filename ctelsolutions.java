@@ -67,13 +67,12 @@ void menu(){
         System.out.println();
         System.out.println("_____________________________________________________________");
         System.out.println("||    |                      |     |                       ||");
-        System.out.println("|| 1. |  Add Student         | 8.  |  Delete Falculty      ||");
-        System.out.println("|| 2. |  Add Facualty        | 9.  |  Delete Course        ||");
-        System.out.println("|| 3. |  Add Course          | 10. |  Report               ||");
-        System.out.println("|| 4. |  Update Student      | 11. |  View Courses         ||");
-        System.out.println("|| 5. |  Update Faculty      | 12. |  View Students        ||");
-        System.out.println("|| 6. |  Update Course       | 13. |  View Faculties       ||");
-        System.out.println("|| 7. |  Delete Student      | 14. |  Exit                 ||");
+        System.out.println("|| 1. |  Add Student         | 7.  |  Delete Falculty      ||");
+        System.out.println("|| 2. |  Add Facualty        | 8.  |  Delete Course        ||");
+        System.out.println("|| 3. |  Add Course          | 9.  |  View Faculties       ||");
+        System.out.println("|| 4. |  Update Student      | 10. |  View Courses         ||");
+        System.out.println("|| 5. |  Update Faculty      | 11. |  View Students        ||");
+        System.out.println("|| 6. |  Delete Student      | 12. |  Exit                 ||");
         System.out.println("||____|______________________|_____|_______________________||");
         choice=in.nextInt();
         switch(choice){
@@ -93,31 +92,25 @@ void menu(){
                 update_faculty();
             break;
             case 6:
-                update_course();
-            break;
-            case 7:
                 delete_student();
             break;
-            case 8:
+            case 7:
                 Delete_faculty();
             break;
-            case 9:
+            case 8:
                 Delete_course();
             break;
-            case 10:
-                add_student();
-            break;
-             case 11:
-                view_course();
-            break;
-            case 12:
-                view_student();
-            break;
-            case 13:
+            case 9:
                 view_faculty();
             break;
-            case 14:
+            case 10:
+                view_course();
             break;
+             case 11:
+                view_student();
+            break;
+            case 12:
+                break;
             default:
             System.out.println(" Invalid choice ");
         }
@@ -159,11 +152,11 @@ void add_student(){
             System.out.print("Enter Fees Type: ");
             feestype=in.next();
             data=receiptno+"@"+date+"#"+name+"$"+mobile+"%"+gender+"^"+address+"&"+course+"*"+fees+"!"+feestype+"\r\n";
-            System.out.println(data);
             studfile.write(data.getBytes());
-            System.out.print("Enter all Details ? y/n");
+            System.out.print("Do you want to Add Another Details? y/n");
             c=in.next().charAt(0);
         }while(c=='y');
+            System.out.println("Details Entered......");
             studfile.close();//do
     }//try
     catch(IOException e){
