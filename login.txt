@@ -1,2 +1,2 @@
-Tahzeeb
-Khan
+admin
+pass@123
